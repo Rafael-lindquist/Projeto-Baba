@@ -1,64 +1,99 @@
-﻿using Data;
-using Services;
+﻿using ProjetoBaba;
 
 class Program
 {
     static void Main()
     {
-        using var db = new FutebolContext();
-        db.Database.EnsureCreated();
-
-        var service = new JogadorService(db);
+        var sistema = new Sistema();
 
         while (true)
         {
-            Console.WriteLine("\n1. Adicionar jogador\n2. Listar jogadores\n3. Atualizar jogador\n4. Remover jogador\n5. Sair");
-            Console.Write("Escolha: ");
-            var opcao = Console.ReadLine();
+            Console.WriteLine("\n--- MENU ---");
+            Console.WriteLine("1. Adicionar Jogador");
+            Console.WriteLine("2. Listar Jogadores");
+            Console.WriteLine("3. Adicionar Jogo");
+            Console.WriteLine("4. Listar Jogos");
+            Console.WriteLine("5. Registrar Interessado");
+            Console.WriteLine("6. Sair");
+            Console.Write("Escolha uma opção: ");
+            string opcao = Console.ReadLine();
 
             switch (opcao)
             {
                 case "1":
-                    Console.Write("RA: "); string ra = Console.ReadLine();
-                    Console.Write("Nome: "); string nome = Console.ReadLine();
-                    Console.Write("Idade: "); int idade = int.Parse(Console.ReadLine());
-                    Console.Write("Posição (goleiro/defesa/ataque): "); string posicao = Console.ReadLine();
-                    service.AdicionarJogador(ra, nome, idade, posicao);
-                    Console.WriteLine("Jogador adicionado.");
+                    Console.Write("Nome: ");
+                    string nome = Console.ReadLine();
+                    Console.Write("Idade: ");
+                    int idade = int.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Posição (0-Goleiro, 1-Defesa, 2-Ataque): ");
+                    int posInt = int.Parse(Console.ReadLine());
+                    Posicao posicao = (Posicao)posInt;
+
+                    sistema.AdicionarJogador(nome, idade, posicao);
+                    Console.WriteLine("Jogador adicionado com sucesso!");
                     break;
 
                 case "2":
-                    var jogadores = service.ListarJogadores();
+                    var jogadores = sistema.ListarJogadores();
                     if (jogadores.Count == 0)
                         Console.WriteLine("Nenhum jogador cadastrado.");
                     else
-                        jogadores.ForEach(j => Console.WriteLine($"RA: {j.RA}, Nome: {j.Nome}, Idade: {j.Idade}, Posição: {j.Posicao}"));
+                        jogadores.ForEach(j => Console.WriteLine(j));
                     break;
 
                 case "3":
-                    Console.Write("RA do jogador: "); string raAtual = Console.ReadLine();
-                    Console.Write("Novo nome: "); string nomeAtual = Console.ReadLine();
-                    Console.Write("Nova idade: "); int idadeAtual = int.Parse(Console.ReadLine());
-                    Console.Write("Nova posição: "); string posicaoAtual = Console.ReadLine();
-                    if (service.AtualizarJogador(raAtual, nomeAtual, idadeAtual, posicaoAtual))
-                        Console.WriteLine("Jogador atualizado.");
-                    else
-                        Console.WriteLine("Jogador não encontrado.");
+                    Console.Write("Data (dd/mm/aaaa): ");
+                    DateTime data = DateTime.Parse(Console.ReadLine());
+
+                    Console.Write("Local: ");
+                    string local = Console.ReadLine();
+
+                    Console.Write("Tipo de campo: ");
+                    string tipo = Console.ReadLine();
+
+                    Console.Write("Jogadores por time (incluindo goleiro): ");
+                    int jogadoresPorTime = int.Parse(Console.ReadLine());
+
+                    Console.Write("Máximo de jogadores (opcional - pressione Enter para ignorar): ");
+                    string maxInput = Console.ReadLine();
+                    int? maxJogadores = string.IsNullOrWhiteSpace(maxInput) ? null : int.Parse(maxInput);
+
+                    sistema.AdicionarJogo(data, local, tipo, jogadoresPorTime, maxJogadores);
+                    Console.WriteLine("Jogo adicionado!");
                     break;
 
                 case "4":
-                    Console.Write("RA do jogador: "); string raDel = Console.ReadLine();
-                    if (service.RemoverJogador(raDel))
-                        Console.WriteLine("Jogador removido.");
+                    var jogos = sistema.ListarJogos();
+                    if (jogos.Count == 0)
+                        Console.WriteLine("Nenhum jogo cadastrado.");
                     else
-                        Console.WriteLine("Jogador não encontrado.");
+                    {
+                        foreach (var jogo in jogos)
+                        {
+                            Console.WriteLine(jogo);
+                            Console.WriteLine("Pode confirmar? " + (jogo.PodeConfirmarPartida() ? "Sim" : "Não"));
+                        }
+                    }
                     break;
 
                 case "5":
+                    Console.Write("ID do Jogo: ");
+                    int idJogo = Int32.Parse(Console.ReadLine());
+
+                    Console.Write("Código do Jogador: ");
+                    int codJogador = Int32.Parse(Console.ReadLine());
+
+                    sistema.RegistrarInteressado(idJogo, codJogador);
+                    Console.WriteLine("Interesse registrado!");
+                    break;
+
+                case "6":
+                    Console.WriteLine("Encerrando...");
                     return;
 
                 default:
-                    Console.WriteLine("Opção inválida.");
+                    Console.WriteLine("Opção inválida!");
                     break;
             }
         }
