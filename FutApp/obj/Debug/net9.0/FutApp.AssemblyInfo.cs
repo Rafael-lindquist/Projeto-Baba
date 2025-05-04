@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FutApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+50ad45801279d4dc401106501143e3185d689915")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fdd5f6c21fdbd389bab85e85c8fa09bae1754bb4")]
 [assembly: System.Reflection.AssemblyProductAttribute("FutApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FutApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
