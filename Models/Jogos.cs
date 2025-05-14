@@ -9,6 +9,7 @@ public class Jogo
     public int JogadoresPorTime { get; set; }
     public int? MaxJogadores { get; set; }
     public List<Jogador> Interessados { get; set; } = new();
+    public List<Partida> Partidas { get; set; } = new();
 
     public Jogo(int id, DateTime data, string local, string tipoCampo, int jogadoresPorTime, int? maxJogadores = null)
     {
