@@ -2,3 +2,4 @@ Controle de verões projeto:
 V.:
     -0.000.01:
         -0.0.0.0.01 (Criação de Partida.cs)
+        -0.0.0.0.02 (Sistemas - Partidas Simples)
