@@ -16,7 +16,6 @@ class Program
             Console.WriteLine("5. Registrar Interessado");
             Console.WriteLine("6. Iniciar Partidas");
             Console.WriteLine("7. Sair");
-
             Console.Write("Escolha uma opção: ");
             string opcao = Console.ReadLine();
 
@@ -99,6 +98,13 @@ class Program
                 case "7":
                     Console.WriteLine("Encerrando...");
                     return;
+                case "7":
+                    Console.Write("ID do Jogo: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Console.Write("Modo (1 - Quem ganha fica | 2 - Rodízio): ");
+                    int modo = int.Parse(Console.ReadLine());
+                    sistema.IniciarPartidasSimples(id, modo);
+                    break;
 
                 default:
                     Console.WriteLine("Opção inválida!");
