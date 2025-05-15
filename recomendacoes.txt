@@ -1,0 +1,41 @@
+Eu nao sei o que voces discutiram, algumas dessas recomendacoes sao genericas, coisas que voces talvez ja tenham feito e/ou discutido
+
+NOTA: Lembrem-se que precisa das 'Interfaces', que sao os 'contratos', mas nao 'Interface' (grafica)
+E chequem o arquivo de comandos git que enviei para o Lucas
+
+Recomendacoes do Gustavo para o Projeto:
+    -EXPLODA o "FutApp"
+        * Um projeto dentro de outro pode criar redundancias e erros de compilacao
+        * A exclusao pode gerar discussoes e melhorias no projeto a longo prazo
+    - Divisao entre back e front
+        * Alem de simular os possiveis empregos de voces no futuro, facilita a compreensao do codigo
+        * Nao precisa ser complexo, e pode ser maleavel
+    - "Subpartes"
+        * De suma importancia ter alguem para gerenciar o versionamento e o github, alem de liderar o projeto em questao de prazos
+        * "bombeiros" e responsaveis por implementar cada parte do projeto ("interface" do console, database, arquitetura do codigo, funcinamento central)
+    - Definir versionamento
+        * Existem muitos tipos, um que eu gosto, para ser o de 'releases' pelo menos eh o do mine
+        * Exemplo: 1.7.10 = {versao}.{patch}.{ruleset}.(no github: {merge/bug correction})
+    - Uso de imports e namespaces
+        * Tipico, acho que nem preciso explicar muito
+    - Database unificado
+        * Se forem fazer em MariaDB, fiquem a vontade para pedir ajuda, eh meio chatinho
+        * Se forem fazer em Json, evitem redundancias e segmentacoes a mais do que necessario
+    - Criacao da branch 'dev'
+        * A dev serve pra que o codigo nao se atropele com a criacao e delecao
+        * Voces podem sembre criar regras e combinados para a dev, e deixar a main para releases
+    - BrainStorm e Dailes
+        * Se jutem para organizar e definir coisas concretas para o trabalho
+        * Dailies (diarias) servem para saber o que cada um vai fazer e se focar no momento do codigo
+            * Nao precisam acontecer diariamente, nao sei o que definiram no codigo
+    - Cronograma
+        * Criem uma pasta que armazene algum tipo de prova de que cada etapa do trabalho foi comprida na data estipulada
+        * Usem os 'issues' e 'actions' e 'problems' do github caso queiram
+            * De novo, precisando de ajuda podem me chamar
+    - Confeccao do README
+        * Olhem o do Duda ou de outros projetos no github e tomem como base
+        * Mesmo que seja somente entre nos, o readme eh a janela do projeto
+    - Acompanhem o Git Graph 
+        * Extremamente util e pode ajudar nos versionamentos
+
+coisas que eu lembro no momento e podem ser uteis para os proximos passos do projeto de voces, bom trabalho!
