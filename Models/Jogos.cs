@@ -1,4 +1,4 @@
-namespace ProjetoBaba;
+namespace classes;
 
 public class Jogo
 {

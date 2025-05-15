@@ -1,5 +1,6 @@
-namespace ProjetoBaba;
+namespace classes;
 
+using classes;
 public class Sistema
 {
     private List<Jogador> jogadores = new();
@@ -33,6 +34,66 @@ public class Sistema
             }
         }
     }
+<<<<<<< HEAD
+    public void IniciarPartidasSimples(int idJogo, int modo){
+
+    var jogo = jogos.FirstOrDefault(j => j.Id == idJogo);
+    if (jogo == null || !jogo.PodeConfirmarPartida())
+    {
+        Console.WriteLine("Jogo inválido ou sem jogadores suficientes.");
+        return;
+    }
+
+    var fila = new Queue<List<Jogador>>();
+    var jogadores = jogo.Interessados.OrderBy(j => Guid.NewGuid()).ToList();
+    int porTime = jogo.JogadoresPorTime;
+
+    for (int i = 0; i + porTime <= jogadores.Count; i += porTime)
+        fila.Enqueue(jogadores.GetRange(i, porTime));
+
+    int num = 1;
+    var time1 = fila.Dequeue();
+    var time2 = fila.Dequeue();
+
+    while (true)
+    {
+        Console.WriteLine($"\nPartida {num}:");
+        Console.WriteLine($"Time 1: {string.Join(", ", time1.Select(j => j.Nome))}");
+        Console.WriteLine($"Time 2: {string.Join(", ", time2.Select(j => j.Nome))}");
+
+        Console.Write("Gols Time 1: ");
+        int g1 = int.Parse(Console.ReadLine());
+
+        Console.Write("Gols Time 2: ");
+        int g2 = int.Parse(Console.ReadLine());
+
+        var partida = new Partida(num++, time1, time2, g1, g2);
+        jogo.Partidas.Add(partida);
+
+        var vencedor = partida.Vencedor();
+
+        if (modo == 1) // Quem ganha fica
+        {
+            var perdedor = vencedor == time1 ? time2 : time1;
+            fila.Enqueue(perdedor);
+            if (fila.Count == 0 || vencedor == null) break;
+            time1 = vencedor;
+            time2 = fila.Dequeue();
+        }
+        else if (modo == 2) // Rodízio simples
+        {
+            fila.Enqueue(time1);
+            fila.Enqueue(time2);
+            if (fila.Count < 2) break;
+            time1 = fila.Dequeue();
+            time2 = fila.Dequeue();
+        }
+    }
+
+    Console.WriteLine("\nPartidas finalizadas.");
+    }
+
+=======
     public void IniciarPartidasSimples(int idJogo, int modo)
     {
         var jogo = jogos.FirstOrDefault(j => j.Id == idJogo);
@@ -90,4 +151,5 @@ public class Sistema
 
         Console.WriteLine("\nPartidas finalizadas.");
     }
+>>>>>>> d15bf8238bccb753aff6a1561751b3d5ea0023b2
 }

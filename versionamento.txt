@@ -5,3 +5,5 @@ V.:
         -0.0.0.0.02 (Sistemas - Partidas Simples)
         -0.0.0.0.02.1 (Recomendacoes)
         -0.0.0.0.03 (Inserindo opção 7 no Program.cs)
+        -0.0.0.0.04 (merge errors sloved)
+        -0.0.0.0.04.1 (left out errors)
