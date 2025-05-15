@@ -1,7 +1,7 @@
 namespace classes;
 
-public enum Posicao
-{
+public enum Posicao{
+
     Goleiro,
     Defesa,
     Ataque

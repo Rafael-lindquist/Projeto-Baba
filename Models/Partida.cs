@@ -1,3 +1,5 @@
+namespace classes;
+
 public class Partida
 {
     public int Numero { get; set; }
@@ -19,7 +21,7 @@ public class Partida
     {
         if (GolsTime1 > GolsTime2) return Time1;
         if (GolsTime2 > GolsTime1) return Time2;
-        return null; // empate
+        return null;
     }
 
     public override string ToString()

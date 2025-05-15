@@ -1,4 +1,4 @@
-﻿using ProjetoBaba;
+﻿using classes;
 
 class Program
 {
@@ -14,7 +14,9 @@ class Program
             Console.WriteLine("3. Adicionar Jogo");
             Console.WriteLine("4. Listar Jogos");
             Console.WriteLine("5. Registrar Interessado");
-            Console.WriteLine("6. Sair");
+            Console.WriteLine("6. Iniciar Partidas");
+            Console.WriteLine("7. Sair");
+
             Console.Write("Escolha uma opção: ");
             string opcao = Console.ReadLine();
 
@@ -68,27 +70,33 @@ class Program
                     if (jogos.Count == 0)
                         Console.WriteLine("Nenhum jogo cadastrado.");
                     else
-                    {
                         foreach (var jogo in jogos)
                         {
                             Console.WriteLine(jogo);
                             Console.WriteLine("Pode confirmar? " + (jogo.PodeConfirmarPartida() ? "Sim" : "Não"));
                         }
-                    }
                     break;
 
                 case "5":
                     Console.Write("ID do Jogo: ");
-                    int idJogo = Int32.Parse(Console.ReadLine());
+                    int idJogo = int.Parse(Console.ReadLine());
 
                     Console.Write("Código do Jogador: ");
-                    int codJogador = Int32.Parse(Console.ReadLine());
+                    int codJogador = int.Parse(Console.ReadLine());
 
                     sistema.RegistrarInteressado(idJogo, codJogador);
                     Console.WriteLine("Interesse registrado!");
                     break;
 
                 case "6":
+                    Console.Write("ID do Jogo: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Console.Write("Modo (1 - Quem ganha fica | 2 - Rodízio): ");
+                    int modo = int.Parse(Console.ReadLine());
+                    sistema.IniciarPartidasSimples(id, modo);
+                    break;
+
+                case "7":
                     Console.WriteLine("Encerrando...");
                     return;
 
