@@ -1,5 +1,0 @@
-C:\Users\rafae\Desktop\fut\FutApp\obj\Debug\net9.0\FutApp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\rafae\Desktop\fut\FutApp\obj\Debug\net9.0\FutApp.AssemblyInfoInputs.cache
-C:\Users\rafae\Desktop\fut\FutApp\obj\Debug\net9.0\FutApp.AssemblyInfo.cs
-C:\Users\rafae\Desktop\fut\FutApp\obj\Debug\net9.0\FutApp.csproj.CoreCompileInputs.cache
-C:\Users\rafae\Desktop\fut\FutApp\obj\Debug\net9.0\FutApp.sourcelink.json
