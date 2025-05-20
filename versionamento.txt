@@ -8,3 +8,7 @@ V.:
         - 0.0.0.0.04 (merge errors sloved)
         - 0.0.0.0.04.1 (left out errors)
         - 0.0.0.0.05 (Exclusão da pasta FutApp)
+        - 0.0.0.0.05.1 (Exclusão da pasta Data)
+        - 0.0.0.0.05.2 (Exclusão da pasta .vscode)
+        - 0.0.0.0.05.3 (Exclusão da pasta bin)
+        - 0.0.0.0.05.4 (Exclusão da pasta obj)
