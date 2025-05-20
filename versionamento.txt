@@ -1,4 +1,4 @@
-Controle de verões projeto:
+Controle de versões do projeto:
 V.:
     - 0.000.01:
         - 0.0.0.0.01 (Criação de Partida.cs)
@@ -12,3 +12,9 @@ V.:
         - 0.0.0.0.05.2 (Exclusão da pasta .vscode)
         - 0.0.0.0.05.3 (Exclusão da pasta bin)
         - 0.0.0.0.05.4 (Exclusão da pasta obj)
+        - 0.0.0.0.05.5 (Exclusão do arquivo FutApp.sln)
+        - 0.0.0.0.05.6 (Exclusão do arquivo GestaoJogadores.csproj)
+        - 0.0.0.0.05.7 (Exclusão do arquivo GestaoJogadores.sln)
+        - 0.0.0.0.05.8 (Exclusão do arquivo Program.cs)
+        - 0.0.0.0.05.9 (Exclusão da pasta Models)
+        - 0.0.0.0.05.10 (Exclusão da pasta Services)
