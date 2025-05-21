@@ -1,0 +1,80 @@
+[
+  {
+    "RA": "001",
+    "Nome": "Lucas",
+    "Idade": 19,
+    "Posicao": "goleiro"
+  },
+  {
+    "RA": "002",
+    "Nome": "Pedro",
+    "Idade": 18,
+    "Posicao": "ataque"
+  },
+  {
+    "RA": "003",
+    "Nome": "Rafael",
+    "Idade": 20,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "004",
+    "Nome": "cafu",
+    "Idade": 45,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "005",
+    "Nome": "duda",
+    "Idade": 38,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "006",
+    "Nome": "neymar",
+    "Idade": 38,
+    "Posicao": "ataque"
+  },
+  {
+    "RA": "007",
+    "Nome": "cr7",
+    "Idade": 41,
+    "Posicao": "ataque"
+  },
+  {
+    "RA": "008",
+    "Nome": "zagueiroaleatorio",
+    "Idade": 22,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "009",
+    "Nome": "zagueiroaleatorio02",
+    "Idade": 23,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "010",
+    "Nome": "Rogerio Ceni",
+    "Idade": 99,
+    "Posicao": "goleiro"
+  },
+  {
+    "RA": "011",
+    "Nome": "allison",
+    "Idade": 32,
+    "Posicao": "goleiro"
+  },
+  {
+    "RA": "013",
+    "Nome": "hilda",
+    "Idade": 12,
+    "Posicao": "defesa"
+  },
+  {
+    "RA": "014",
+    "Nome": "belihan",
+    "Idade": 21,
+    "Posicao": "defesa"
+  }
+]

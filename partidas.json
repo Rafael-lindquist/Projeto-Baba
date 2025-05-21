@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Data": "2026-04-26T00:00:00",
+    "Local": "lagoa bonita",
+    "TipoCampo": "grama",
+    "JogadoresPorTime": 6,
+    "LimiteTimes": 2,
+    "InteressadosRA": [],
+    "PartidaConfirmada": false
+  },
+  {
+    "Id": 2,
+    "Data": "2025-05-28T00:00:00",
+    "Local": "Unasp",
+    "TipoCampo": "Quadra",
+    "JogadoresPorTime": 4,
+    "LimiteTimes": null,
+    "InteressadosRA": [
+      "001",
+      "003",
+      "002",
+      "005",
+      "004",
+      "006",
+      "007",
+      "008",
+      "010"
+    ],
+    "PartidaConfirmada": true
+  }
+]

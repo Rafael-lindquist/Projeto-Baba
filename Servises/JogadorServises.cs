@@ -1,0 +1,77 @@
+using Models;
+using System.Text.Json;
+
+namespace Services;
+
+public class JogadorService
+{
+    private static readonly string FilePath = Path.Combine(
+     Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+     "jogadores.json");
+    private List<Jogador> jogadores;
+
+    public JogadorService()
+    {
+        jogadores = CarregarDoArquivo();
+    }
+
+    private List<Jogador> CarregarDoArquivo()
+    {
+        if (!File.Exists(FilePath))
+            return new List<Jogador>();
+
+        var json = File.ReadAllText(FilePath);
+        return JsonSerializer.Deserialize<List<Jogador>>(json) ?? new List<Jogador>();
+    }
+
+    private void SalvarNoArquivo()
+    {
+        var json = JsonSerializer.Serialize(jogadores, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(FilePath, json);
+    }
+
+    public void AdicionarJogador(string nome, int idade, string posicao)
+    {
+        int maiorRA = jogadores
+        .Select(j => int.Parse(j.RA))
+        .DefaultIfEmpty(0)
+        .Max();
+
+        string ra = (maiorRA + 1).ToString("D3");
+
+        jogadores.Add(new Jogador { RA = ra, Nome = nome, Idade = idade, Posicao = posicao });
+        SalvarNoArquivo();
+    }
+
+    public List<Jogador> ListarJogadores()
+    {
+        return jogadores;
+    }
+
+    public bool AtualizarJogador(string ra, string nome, int idade, string posicao)
+    {
+        var jogador = jogadores.FirstOrDefault(j => j.RA == ra);
+        if (jogador == null) return false;
+
+        jogador.Nome = nome;
+        jogador.Idade = idade;
+        jogador.Posicao = posicao;
+        SalvarNoArquivo();
+        return true;
+    }
+
+    public bool RemoverJogador(string ra)
+    {
+        var jogador = jogadores.FirstOrDefault(j => j.RA == ra);
+        if (jogador == null) return false;
+
+        jogadores.Remove(jogador);
+        SalvarNoArquivo();
+        return true;
+    }
+    public Jogador ObterJogadorPorRA(string ra)
+    {
+        return jogadores.FirstOrDefault(j => j.RA == ra);
+    }
+    
+}
