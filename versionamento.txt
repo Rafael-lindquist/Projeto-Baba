@@ -18,3 +18,4 @@ V.:
         - 0.0.0.0.05.8 (Exclusão do arquivo Program.cs)
         - 0.0.0.0.05.9 (Exclusão da pasta Models)
         - 0.0.0.0.05.10 (Exclusão da pasta Services)
+        - 0.0.0.0.06 (Implementação do codigo do lucas)
