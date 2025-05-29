@@ -7,6 +7,14 @@
     "JogadoresPorTime": 6,
     "LimiteTimes": 2,
     "InteressadosRA": [],
+    "Time1Nome": null,
+    "Time1JogadoresRA": [],
+    "PlacarTime1": null,
+    "Time2Nome": null,
+    "Time2JogadoresRA": [],
+    "PlacarTime2": null,
+    "PartidaFinalizada": false,
+    "NomeTimeVencedor": null,
     "PartidaConfirmada": false
   },
   {
@@ -27,6 +35,49 @@
       "008",
       "010"
     ],
+    "Time1Nome": null,
+    "Time1JogadoresRA": [],
+    "PlacarTime1": null,
+    "Time2Nome": null,
+    "Time2JogadoresRA": [],
+    "PlacarTime2": null,
+    "PartidaFinalizada": false,
+    "NomeTimeVencedor": null,
+    "PartidaConfirmada": true
+  },
+  {
+    "Id": 3,
+    "Data": "4567-02-11T00:00:00",
+    "Local": "lagoa bonita",
+    "TipoCampo": "socity",
+    "JogadoresPorTime": 2,
+    "LimiteTimes": 4,
+    "InteressadosRA": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010"
+    ],
+    "Time1Nome": "Time 1",
+    "Time1JogadoresRA": [
+      "001",
+      "002"
+    ],
+    "PlacarTime1": null,
+    "Time2Nome": "Time 2",
+    "Time2JogadoresRA": [
+      "003",
+      "004"
+    ],
+    "PlacarTime2": null,
+    "PartidaFinalizada": false,
+    "NomeTimeVencedor": null,
     "PartidaConfirmada": true
   }
 ]

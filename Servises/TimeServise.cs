@@ -76,4 +76,9 @@ public class TimeService
 
         return new List<Time> { time1, time2 };
     }
+
+    internal IEnumerable<Time> GerarTimes()
+    {
+        throw new NotImplementedException();
+    }
 }
