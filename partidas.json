@@ -79,5 +79,49 @@
     "PartidaFinalizada": false,
     "NomeTimeVencedor": null,
     "PartidaConfirmada": true
+  },
+  {
+    "Id": 4,
+    "Data": "2025-06-15T00:00:00",
+    "Local": "lagoa bonita",
+    "TipoCampo": "gramado ",
+    "JogadoresPorTime": 5,
+    "LimiteTimes": null,
+    "InteressadosRA": [
+      "014",
+      "013",
+      "011",
+      "010",
+      "009",
+      "008",
+      "007",
+      "006",
+      "005",
+      "004",
+      "003",
+      "002",
+      "001"
+    ],
+    "Time1Nome": "Time 1",
+    "Time1JogadoresRA": [
+      "011",
+      "014",
+      "009",
+      "005",
+      "003"
+    ],
+    "PlacarTime1": 2,
+    "Time2Nome": "Time 2",
+    "Time2JogadoresRA": [
+      "010",
+      "013",
+      "008",
+      "004",
+      "007"
+    ],
+    "PlacarTime2": 1,
+    "PartidaFinalizada": true,
+    "NomeTimeVencedor": "Time 1",
+    "PartidaConfirmada": true
   }
 ]

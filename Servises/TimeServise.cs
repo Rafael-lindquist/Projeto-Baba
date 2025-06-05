@@ -10,7 +10,6 @@ public class TimeService
         this.jogadorService = jogadorService;
     }
 
-    // Gera dois times pegando jogadores na ordem de chegada (lista de RAs)
     public List<Time> GerarTimesOrdemChegada(List<string> interessadosRA, int jogadoresPorTime)
     {
         if (interessadosRA.Count < jogadoresPorTime * 2)
@@ -37,45 +36,64 @@ public class TimeService
         return new List<Time> { time1, time2 };
     }
 
-    // Gera times equilibrados por posição
-    public List<Time> GerarTimesEquilibrados(List<string> interessadosRA)
+    
+    public List<Time> GerarTimesEquilibrados(List<string> interessadosRA, int numeroMaximoJogadoresPorTime)
+{
+    var jogadores = interessadosRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)).Where(j => j != null).ToList();
+
+    var goleiros = jogadores.Where(j => j.Posicao.ToLower() == "goleiro").ToList();
+    var defesas = jogadores.Where(j => j.Posicao.ToLower() == "defesa").ToList();
+    var atacantes = jogadores.Where(j => j.Posicao.ToLower() == "ataque").ToList();
+
+    if (goleiros.Count < 2)
+        return null; // precisa de ao menos 2 goleiros para equilibrar
+
+    var time1 = new Time { Nome = "Time 1", JogadoresRA = new List<string>() };
+    var time2 = new Time { Nome = "Time 2", JogadoresRA = new List<string>() };
+
+    // Distribuir goleiros (máximo 1 por time)
+    time1.JogadoresRA.Add(goleiros[0].RA);
+    time2.JogadoresRA.Add(goleiros[1].RA);
+
+    // Combinar defensores e atacantes para distribuição equilibrada
+    var restantes = defesas.Concat(atacantes).ToList();
+
+    // Distribuir alternando para manter equilíbrio e respeitar o limite de jogadores
+    for (int i = 0; i < restantes.Count; i++)
     {
-        // Exemplo simples:
-        // Divide jogadores em grupos por posição (goleiro, defesa, ataque)
-        // Distribui equilibradamente entre os dois times
-
-        var jogadores = interessadosRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)).Where(j => j != null).ToList();
-
-        var goleiros = jogadores.Where(j => j.Posicao.ToLower() == "goleiro").ToList();
-        var defesas = jogadores.Where(j => j.Posicao.ToLower() == "defesa").ToList();
-        var atacantes = jogadores.Where(j => j.Posicao.ToLower() == "ataque").ToList();
-
-        if (goleiros.Count < 2)
-            return null; // precisa de ao menos 2 goleiros para equilibrar
-
-        var time1 = new Time { Nome = "Time 1", JogadoresRA = new List<string>() };
-        var time2 = new Time { Nome = "Time 2", JogadoresRA = new List<string>() };
-
-        // Distribuir goleiros
-        time1.JogadoresRA.Add(goleiros[0].RA);
-        time2.JogadoresRA.Add(goleiros[1].RA);
-
-        // Distribuir defensores alternando
-        for (int i = 0; i < defesas.Count; i++)
+        if (time1.JogadoresRA.Count < numeroMaximoJogadoresPorTime &&
+            (time1.JogadoresRA.Count <= time2.JogadoresRA.Count))
         {
-            if (i % 2 == 0) time1.JogadoresRA.Add(defesas[i].RA);
-            else time2.JogadoresRA.Add(defesas[i].RA);
+            time1.JogadoresRA.Add(restantes[i].RA);
+        }
+        else if (time2.JogadoresRA.Count < numeroMaximoJogadoresPorTime)
+        {
+            time2.JogadoresRA.Add(restantes[i].RA);
         }
 
-        // Distribuir atacantes alternando
-        for (int i = 0; i < atacantes.Count; i++)
+        // Parar a distribuição se ambos os times atingirem o limite máximo de jogadores
+        if (time1.JogadoresRA.Count == numeroMaximoJogadoresPorTime &&
+            time2.JogadoresRA.Count == numeroMaximoJogadoresPorTime)
         {
-            if (i % 2 == 0) time1.JogadoresRA.Add(atacantes[i].RA);
-            else time2.JogadoresRA.Add(atacantes[i].RA);
+            break;
         }
-
-        return new List<Time> { time1, time2 };
     }
+
+    // Garantir que os times tenham o mesmo número de jogadores
+    while (time1.JogadoresRA.Count > time2.JogadoresRA.Count)
+    {
+        var jogadorExtra = time1.JogadoresRA.Last();
+        time1.JogadoresRA.Remove(jogadorExtra);
+    }
+
+    while (time2.JogadoresRA.Count > time1.JogadoresRA.Count)
+    {
+        var jogadorExtra = time2.JogadoresRA.Last();
+        time2.JogadoresRA.Remove(jogadorExtra);
+    }
+
+    return new List<Time> { time1, time2 };
+}
 
     internal IEnumerable<Time> GerarTimes()
     {
