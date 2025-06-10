@@ -1,6 +1,8 @@
+using interfaces;
+
 namespace Models;
 
-public class Jogador
+public class Jogador: IJogador
 {
     public string RA { get; set; }
     public string Nome { get; set; }

@@ -1,7 +1,9 @@
+using interfaces;
+
 namespace Models;
 
 
-public class Partida
+public class Partida : IPartida
 {
     public int Id { get; set; }
     public DateTime Data { get; set; }
