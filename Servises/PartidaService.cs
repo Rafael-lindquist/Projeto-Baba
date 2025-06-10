@@ -46,7 +46,7 @@ public class PartidaService
         SalvarNoArquivo();
     }
 
-    public List<Partida> ListarPartidas() => partidas;
+    public List<Partida> BuscarPartida() => partidas;
 
     public Partida? ObterPartidaPorId(int id)
     {

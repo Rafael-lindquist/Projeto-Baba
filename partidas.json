@@ -35,11 +35,21 @@
       "008",
       "010"
     ],
-    "Time1Nome": null,
-    "Time1JogadoresRA": [],
+    "Time1Nome": "Time 1",
+    "Time1JogadoresRA": [
+      "001",
+      "003",
+      "002",
+      "005"
+    ],
     "PlacarTime1": null,
-    "Time2Nome": null,
-    "Time2JogadoresRA": [],
+    "Time2Nome": "Time 2",
+    "Time2JogadoresRA": [
+      "004",
+      "006",
+      "007",
+      "008"
+    ],
     "PlacarTime2": null,
     "PartidaFinalizada": false,
     "NomeTimeVencedor": null,

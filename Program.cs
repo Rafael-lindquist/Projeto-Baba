@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
 using Views;
+using System.Data;
 
 // implementar buscar partida por data e/ou id
 // sistema de pontos 
@@ -61,6 +62,8 @@ class Program
                     MenuTimes(partidaService, jogadorService, timeService);
                     break;
                 case "4":
+                    TelaInicial.Exibirtelainicial();
+                    System.Threading.Thread.Sleep(1000);
                     return;
                 default:
                     Console.WriteLine("Opção inválida.");
@@ -71,16 +74,29 @@ class Program
 
     static void MenuJogadores(JogadorService service)
     {
+        Console.Clear();
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("\n--- Jogadores ---");
-            Console.WriteLine("1. Adicionar jogador");
-            Console.WriteLine("2. Listar jogadores");
-            Console.WriteLine("3. Atualizar jogador");
-            Console.WriteLine("4. Remover jogador");
-            Console.WriteLine("5. Voltar");
-            Console.Write("Escolha: ");
+            Console.WriteLine(@"
+                 _________________________________
+                |           |        |            |
+                |           |________|            |
+                |                                 |
+                |          Jogadores              |
+                |                                 |
+                |     1. Adicionar jogador        |
+                |     2. Listar jogadores         |
+                |----------------o----------------|
+                |     3. Atualizar jogador        |
+                |     4. Remover jogador          |
+                |     5. Voltar                   |
+                |                                 |
+                |                                 |
+                |            ________             |
+                |           |        |            |
+                |___________|________|____________|
+            ");
+            Console.Write(": ");
             var opcao = Console.ReadLine();
 
             switch (opcao)
@@ -132,18 +148,29 @@ class Program
 
     static void MenuPartidas(PartidaService service, JogadorService jogadorService)
     {
+        Console.Clear();
         while (true)
-        {   
-            Console.Clear();
-            Console.WriteLine("\n--- Partidas ---");
-            Console.WriteLine("1. Adicionar partida");
-            Console.WriteLine("2. Listar partidas");
-            Console.WriteLine("3. Atualizar partida");
-            Console.WriteLine("4. Remover partida");
-            Console.WriteLine("5. Adicionar interessado");
-            Console.WriteLine("6. Registrar resultado da partida");
-            Console.WriteLine("7. Voltar");
-            Console.Write("Escolha: ");
+        {
+            Console.WriteLine(@"
+                 _________________________________
+                |           |        |            |
+                |           |________|            |
+                |                                 |
+                |          Partidas               |
+                |                                 |
+                |     1. Adicionar partida        |
+                |     2. Buscar partidas          |
+                |----------------o----------------|
+                |     3. Listar partida           |
+                |     4. Remover partida          |
+                |     5. Adicionar interessado    |
+                |     6. Registrar resultado      |
+                |     7. Atualizar partida        |
+                |            ________             |
+                |           |        | 8. Voltar  |
+                |___________|________|____________|
+            ");
+            Console.Write(": ");
             var opcao = Console.ReadLine();
 
             switch (opcao)
@@ -163,69 +190,98 @@ class Program
                     break;
 
                 case "2":
-                    var partidas = service.ListarPartidas();
+                    Console.Clear();
+                    var partidas = service.BuscarPartida();
                     if (partidas.Count == 0)
                     {
                         Console.WriteLine("Nenhuma partida cadastrada.");
                     }
                     else
                     {
-                        foreach (var p in partidas)
+                        int correcao = 0;
+                        while (true)
                         {
-                            Console.WriteLine($"\nID: {p.Id}");
-                            Console.WriteLine($"Data: {p.Data:dd/MM/yyyy}");
-                            Console.WriteLine($"Local: {p.Local}");
-                            Console.WriteLine($"Tipo de campo: {p.TipoCampo}");
-                            Console.WriteLine($"Jogadores por time: {p.JogadoresPorTime}");
-                            Console.WriteLine($"Limite de times: {(p.LimiteTimes.HasValue ? p.LimiteTimes.ToString() : "Sem limite")}");
-
-                            var nomesInteressados = p.InteressadosRA
-                                .Select(ra =>
+                            Console.Write("Insira o ID da partida: ");
+                            var id_busca = Console.ReadLine();
+                            foreach (var p in partidas)
+                            {
+                                if (p.Id.ToString() == id_busca)
                                 {
-                                    var jogador = jogadorService.ListarJogadores().FirstOrDefault(j => j.RA == ra);
-                                    return jogador != null ? jogador.Nome : $"RA {ra} (não encontrado)";
-                                });
-                            Console.WriteLine($"Interessados: {string.Join(", ", nomesInteressados)}");
+                                    correcao += 1;
+                                    Console.WriteLine($"\nID: {p.Id}");
+                                    Console.WriteLine($"Data: {p.Data:dd/MM/yyyy}");
+                                    Console.WriteLine($"Local: {p.Local}");
+                                    Console.WriteLine($"Tipo de campo: {p.TipoCampo}");
+                                    Console.WriteLine($"Jogadores por time: {p.JogadoresPorTime}");
+                                    Console.WriteLine($"Limite de times: {(p.LimiteTimes.HasValue ? p.LimiteTimes.ToString() : "Sem limite")}");
 
-                            if (p.Time1JogadoresRA != null && p.Time1JogadoresRA.Any())
-                            {
-                                var nomesTime1 = p.Time1JogadoresRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)?.Nome ?? $"RA {ra}");
-                                Console.WriteLine($"{p.Time1Nome ?? "Time 1"}: {string.Join(", ", nomesTime1)}");
-                            }
-                            if (p.Time2JogadoresRA != null && p.Time2JogadoresRA.Any())
-                            {
-                                var nomesTime2 = p.Time2JogadoresRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)?.Nome ?? $"RA {ra}");
-                                Console.WriteLine($"{p.Time2Nome ?? "Time 2"}: {string.Join(", ", nomesTime2)}");
-                            }
+                                    var nomesInteressados = p.InteressadosRA
+                                        .Select(ra =>
+                                        {
+                                            var jogador = jogadorService.ListarJogadores().FirstOrDefault(j => j.RA == ra);
+                                            return jogador != null ? jogador.Nome : $"RA {ra} (não encontrado)";
+                                        });
+                                    Console.WriteLine($"Interessados: {string.Join(", ", nomesInteressados)}");
 
-                            if (p.PartidaFinalizada) //
+                                    if (p.Time1JogadoresRA != null && p.Time1JogadoresRA.Any())
+                                    {
+                                        var nomesTime1 = p.Time1JogadoresRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)?.Nome ?? $"RA {ra}");
+                                        Console.WriteLine($"{p.Time1Nome ?? "Time 1"}: {string.Join(", ", nomesTime1)}");
+                                    }
+                                    if (p.Time2JogadoresRA != null && p.Time2JogadoresRA.Any())
+                                    {
+                                        var nomesTime2 = p.Time2JogadoresRA.Select(ra => jogadorService.ObterJogadorPorRA(ra)?.Nome ?? $"RA {ra}");
+                                        Console.WriteLine($"{p.Time2Nome ?? "Time 2"}: {string.Join(", ", nomesTime2)}");
+                                    }
+
+                                    if (p.PartidaFinalizada) //
+                                    {
+                                        Console.WriteLine($"Resultado: {p.Time1Nome ?? "Time 1"} {p.PlacarTime1} x {p.PlacarTime2} {p.Time2Nome ?? "Time 2"}");
+                                        Console.WriteLine($"Vencedor: {p.NomeTimeVencedor}");
+                                        Console.WriteLine($"Status: Finalizada ✅");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine($"Status: {(p.PartidaConfirmada ? "Confirmada ✅" : "A confirmar ⏳")}");
+                                    }
+                                    break;
+                                }
+
+                            }
+                            if (correcao == 0)
                             {
-                                Console.WriteLine($"Resultado: {p.Time1Nome ?? "Time 1"} {p.PlacarTime1} x {p.PlacarTime2} {p.Time2Nome ?? "Time 2"}");
-                                Console.WriteLine($"Vencedor: {p.NomeTimeVencedor}");
-                                Console.WriteLine($"Status: Finalizada ✅");
+                                Console.WriteLine("O ID inserido é inválido");
+                                Console.WriteLine("Deseja Voltar? [Y/N]");
+                                var yn = Console.ReadLine();
+                                if (yn.ToString() == "Y")
+                                {
+                                    break;       
+                                }
                             }
                             else
                             {
-                                Console.WriteLine($"Status: {(p.PartidaConfirmada ? "Confirmada ✅" : "A confirmar ⏳")}");
+                                break;
                             }
                         }
                     }
                     break;
 
                 case "3":
-                    Console.Write("ID da partida: "); int idAtual = int.Parse(Console.ReadLine());
-                    Console.Write("Nova data (dd/MM/yyyy): ");
-                    DateTime novaData = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                    Console.Write("Novo local: "); string novoLocal = Console.ReadLine();
-                    Console.Write("Novo tipo de campo: "); string novoTipo = Console.ReadLine();
-                    Console.Write("Novo nº de jogadores por time: "); int novoQtd = int.Parse(Console.ReadLine());
-                    Console.Write("Novo limite de times (pressione Enter para deixar igual): ");
-                    string novoLimiteInput = Console.ReadLine();
-                    int? novoLimite = string.IsNullOrWhiteSpace(novoLimiteInput) ? null : int.Parse(novoLimiteInput);
-                    if (service.AtualizarPartida(idAtual, novaData, novoLocal, novoTipo, novoQtd, novoLimite))
-                        Console.WriteLine("Partida atualizada.");
+                    Console.Clear();
+                    var partidas1 = service.BuscarPartida();
+                    if (partidas1.Count == 0)
+                    {
+                        Console.WriteLine("Nenhuma partida cadastrada.");
+                    }
                     else
-                        Console.WriteLine("Partida não encontrada.");
+                    {
+                        foreach (var p in partidas1)
+                        {
+                            Console.Write($"\n| ID: {p.Id} | ");
+                            Console.Write($"Data: {p.Data:dd/MM/yyyy} |  ");
+                            Console.WriteLine($"Local: {p.Local}");
+                        }
+                    }
                     break;
 
                 case "4":
@@ -297,8 +353,23 @@ class Program
                         Console.WriteLine("Erro ao registrar resultado.");
                     }
                     break;
-
                 case "7":
+                    Console.Write("ID da partida: "); int idAtual = int.Parse(Console.ReadLine());
+                    Console.Write("Nova data (dd/MM/yyyy): ");
+                    DateTime novaData = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    Console.Write("Novo local: "); string novoLocal = Console.ReadLine();
+                    Console.Write("Novo tipo de campo: "); string novoTipo = Console.ReadLine();
+                    Console.Write("Novo nº de jogadores por time: "); int novoQtd = int.Parse(Console.ReadLine());
+                    Console.Write("Novo limite de times (pressione Enter para deixar igual): ");
+                    string novoLimiteInput = Console.ReadLine();
+                    int? novoLimite = string.IsNullOrWhiteSpace(novoLimiteInput) ? null : int.Parse(novoLimiteInput);
+                    if (service.AtualizarPartida(idAtual, novaData, novoLocal, novoTipo, novoQtd, novoLimite))
+                        Console.WriteLine("Partida atualizada.");
+                    else
+                        Console.WriteLine("Partida não encontrada.");
+                    break;
+
+                case "8":
                     return;
 
                 default:
@@ -310,15 +381,29 @@ class Program
 
     static void MenuTimes(PartidaService partidaService, JogadorService jogadorService, TimeService timeService)
     {
+        Console.Clear();
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine("\n--- Gestão de Times ---");
-            Console.WriteLine("1. Gerar times por ordem de chegada");
-            Console.WriteLine("2. Gerar times equilibrados por posição");
-            Console.WriteLine("3. Gerar times genérico (aleatório/customizado)");
-            Console.WriteLine("4. Voltar");
-            Console.Write("Escolha: ");
+            Console.WriteLine(@"
+                 _________________________________
+                |           |        |            |
+                |           |________|            |
+                |                                 |
+                |          Gestão de Times        |
+                |                                 |
+                |     1. Gerar times por ordem    |
+                |     de chegada                  |
+                |----------------o----------------|
+                |     2. Gerar times equilibrados |
+                |     por posição                 |
+                |     3. Gerar times aleatório    |
+                |     4. Voltar                   |
+                |                                 |
+                |            ________             |
+                |           |        |            |
+                |___________|________|____________|
+            ");
+            Console.Write(": ");
             var opcao = Console.ReadLine();
 
             if (opcao == "4") return;
@@ -350,12 +435,15 @@ class Program
             {
                 case "1":
                     times = timeService.GerarTimesOrdemChegada(partida.InteressadosRA, partida.JogadoresPorTime);
+                    Console.Clear();
                     break;
                 case "2":
                     times = timeService.GerarTimesEquilibrados(partida.InteressadosRA, partida.JogadoresPorTime);
+                    Console.Clear();
                     break;
                 case "3":
                     times = timeService.GerarTimesGenerico(partida.InteressadosRA, partida.JogadoresPorTime);
+                    Console.Clear();
                     break;
                 default:
                     Console.WriteLine("Opção inválida.");
