@@ -21,4 +21,4 @@ V.:
         - 0.0.0.0.06 (Implementação do codigo do lucas)
         - 0.0.0.0.07 (atualização gerar times por posição, com somente um goleiro por time)
         - 0.0.0.0.08 (Tela inicial, atualização do menu e implementação de interfaces)
-
+        - 0.0.0.0.09 (Implementação do sistema de pontos)

@@ -30,7 +30,7 @@ public class JogadorService
         File.WriteAllText(FilePath, json);
     }
 
-    public void AdicionarJogador(string nome, int idade, string posicao)
+    public void AdicionarJogador(string nome, int idade, string posicao, int pontos=0)
     {
         int maiorRA = jogadores
         .Select(j => int.Parse(j.RA))
@@ -39,7 +39,7 @@ public class JogadorService
 
         string ra = (maiorRA + 1).ToString("D3");
 
-        jogadores.Add(new Jogador { RA = ra, Nome = nome, Idade = idade, Posicao = posicao });
+        jogadores.Add(new Jogador { RA = ra, Nome = nome, Idade = idade, Posicao = posicao, Pontos = pontos });
         SalvarNoArquivo();
     }
 
@@ -48,7 +48,7 @@ public class JogadorService
         return jogadores;
     }
 
-    public bool AtualizarJogador(string ra, string nome, int idade, string posicao)
+    public bool AtualizarJogador(string ra, string nome, int idade, string posicao, int pontos = 0)
     {
         var jogador = jogadores.FirstOrDefault(j => j.RA == ra);
         if (jogador == null) return false;
@@ -56,6 +56,7 @@ public class JogadorService
         jogador.Nome = nome;
         jogador.Idade = idade;
         jogador.Posicao = posicao;
+        jogador.Pontos = pontos;
         SalvarNoArquivo();
         return true;
     }

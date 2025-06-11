@@ -24,7 +24,7 @@ class Program
         TelaInicial.Exibirtelainicial();
         Console.ReadKey();
         Console.Clear();
-        
+
         while (true)
         {
             Console.Clear();
@@ -39,8 +39,8 @@ class Program
                 |     2. Gerenciar partidas       |
                 |----------------o----------------|
                 |     3. Gerenciar times          |
-                |     4. Sair                     |
-                |                                 |
+                |     4. Mostrar ranking          |
+                |     5. Sair                     |
                 |                                 |
                 |                                 |
                 |            ________             |
@@ -62,6 +62,9 @@ class Program
                     MenuTimes(partidaService, jogadorService, timeService);
                     break;
                 case "4":
+                    MostrarRanking(jogadorService);
+                    break;
+                case "5":
                     TelaInicial.Exibirtelainicial();
                     System.Threading.Thread.Sleep(1000);
                     return;
@@ -102,6 +105,7 @@ class Program
             switch (opcao)
             {
                 case "1":
+                    Console.Clear();
                     Console.Write("Nome: "); string nome = Console.ReadLine();
                     Console.Write("Idade: "); int idade = int.Parse(Console.ReadLine());
                     Console.Write("Posição (goleiro/defesa/ataque): "); string posicao = Console.ReadLine();
@@ -110,6 +114,7 @@ class Program
                     break;
 
                 case "2":
+                    Console.Clear();
                     var jogadores = service.ListarJogadores();
                     if (jogadores.Count == 0)
                         Console.WriteLine("Nenhum jogador cadastrado.");
@@ -118,6 +123,7 @@ class Program
                     break;
 
                 case "3":
+                    Console.Clear();
                     Console.Write("RA do jogador: "); string raAtual = Console.ReadLine();
                     Console.Write("Novo nome: "); string nomeAtual = Console.ReadLine();
                     Console.Write("Nova idade: "); int idadeAtual = int.Parse(Console.ReadLine());
@@ -129,6 +135,7 @@ class Program
                     break;
 
                 case "4":
+                    Console.Clear();
                     Console.Write("RA do jogador: "); string raDel = Console.ReadLine();
                     if (service.RemoverJogador(raDel))
                         Console.WriteLine("Jogador removido.");
@@ -236,7 +243,7 @@ class Program
 
                                     if (p.PartidaFinalizada) //
                                     {
-                                        Console.WriteLine($"Resultado: {p.Time1Nome ?? "Time 1"} {p.PlacarTime1} x {p.PlacarTime2} {p.Time2Nome ?? "Time 2"}");
+                                        Console.WriteLine($"Resultado: {p.Time1Nome ?? "Time 1"} x {p.Time2Nome ?? "Time 2"} | {p.PlacarTime1} x {p.PlacarTime2} |");
                                         Console.WriteLine($"Vencedor: {p.NomeTimeVencedor}");
                                         Console.WriteLine($"Status: Finalizada ✅");
                                     }
@@ -255,7 +262,7 @@ class Program
                                 var yn = Console.ReadLine();
                                 if (yn.ToString() == "Y")
                                 {
-                                    break;       
+                                    break;
                                 }
                             }
                             else
@@ -481,5 +488,33 @@ class Program
                 }
             }
         }
+    }
+    public static void MostrarRanking(JogadorService service)
+    {
+        Console.Clear();
+        var jogadores = service.ListarJogadores();
+        if (jogadores.Count == 0)
+            Console.WriteLine("Nenhum jogador cadastrado.");
+        else
+        {
+            var ranking = jogadores.OrderByDescending(j => j.Pontos).ToList();
+            Console.WriteLine(@"
++--------------------------------------+
+|           RANKING DE PONTOS          |
++--------------------------------------+
+| JOGADOR                     | PONTOS |
++--------------------------------------+");
+            
+            foreach (var j in ranking)
+            {
+                Console.WriteLine($"| {j.Nome,-27} | {j.Pontos,6} |");
+            }
+
+            Console.WriteLine("+--------------------------------------+");
+        }
+
+        Console.Write("\n\n\nPressione qualquer tecla para voltar");
+        Console.ReadKey();
+
     }
 }
