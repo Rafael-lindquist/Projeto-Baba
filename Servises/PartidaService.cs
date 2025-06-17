@@ -1,5 +1,6 @@
 using Models;
 using System.Text.Json;
+using Exeptions;
 
 namespace Services;
 
@@ -60,7 +61,7 @@ public class PartidaService
             return false;
 
         if (partida.InteressadosRA.Contains(raJogador))
-            return false;
+            throw new JogadorJaInscritoExepitions(raJogador);
 
         if (partida.LimiteTimes.HasValue &&
             partida.InteressadosRA.Count >= partida.LimiteTimes.Value * partida.JogadoresPorTime)
@@ -106,7 +107,7 @@ public class PartidaService
         partida.Time1JogadoresRA = new List<string>(time1.JogadoresRA); // Copia a lista
         partida.Time2Nome = time2.Nome;
         partida.Time2JogadoresRA = new List<string>(time2.JogadoresRA); // Copia a lista
-        
+
         // Reseta placares e resultado caso os times sejam reassociados
         partida.PlacarTime1 = null;
         partida.PlacarTime2 = null;
@@ -124,7 +125,7 @@ public class PartidaService
         if (partida == null || partida.Time1JogadoresRA.Count == 0 || partida.Time2JogadoresRA.Count == 0)
         {
             // Partida não encontrada ou times não associados
-            return false; 
+            return false;
         }
 
         partida.PlacarTime1 = placarTime1;

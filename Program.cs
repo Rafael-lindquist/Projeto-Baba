@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Views;
 using System.Data;
+using Exeptions;
 
 // implementar buscar partida por data e/ou id
 // sistema de pontos 
@@ -308,11 +309,18 @@ class Program
                         Console.WriteLine("Jogador com esse RA não encontrado.");
                         break;
                     }
+                    try
+                    {
+                        if (service.AdicionarInteressado(idInt, raJogador))
+                            Console.WriteLine("Interessado adicionado.");
+                        else
+                            Console.WriteLine("Não foi possível adicionar (limite atingido, partida não encontrada ou jogador já interessado).");
+                    }
+                    catch (JogadorJaInscritoExepitions ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
 
-                    if (service.AdicionarInteressado(idInt, raJogador))
-                        Console.WriteLine("Interessado adicionado.");
-                    else
-                        Console.WriteLine("Não foi possível adicionar (limite atingido, partida não encontrada ou jogador já interessado).");
                     break;
 
                 case "6": // Registrar Resultado
