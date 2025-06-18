@@ -75,4 +75,24 @@ public class JogadorService
         return jogadores.FirstOrDefault(j => j.RA == ra);
     }
     
+
+    public void BuscarJogadorPorNome(string termo)
+    {
+        var encontrados = jogadores
+            .Where(j => j.Nome.Contains(termo, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (encontrados.Count == 0)
+        {
+            Console.WriteLine("❌ Nenhum jogador encontrado.");
+            return;
+        }
+
+        Console.WriteLine($"🔎 Resultados para \"{termo}\":");
+        foreach (var j in encontrados)
+        {
+            Console.WriteLine($"- RA: {j.RA} | Nome: {j.Nome} | Idade: {j.Idade} | Posição: {j.Posicao} | Pontos: {j.Pontos}");
+        }
+    }
+
 }

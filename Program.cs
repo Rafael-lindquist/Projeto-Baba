@@ -93,7 +93,8 @@ class Program
                 |----------------o----------------|
                 |     3. Atualizar jogador        |
                 |     4. Remover jogador          |
-                |     5. Voltar                   |
+                |     5. Buscar Jogador           |
+                |     6. Voltar                   |
                 |                                 |
                 |                                 |
                 |            ________             |
@@ -145,6 +146,13 @@ class Program
                     break;
 
                 case "5":
+                    Console.Clear();
+                    Console.Write("Digite o nome para buscar: ");
+                    string termoBusca = Console.ReadLine();
+                    service.BuscarJogadorPorNome(termoBusca);
+                    break;
+
+                case "6":
                     return;
 
                 default:
