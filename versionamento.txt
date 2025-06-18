@@ -22,3 +22,5 @@ V.:
         - 0.0.0.0.07 (atualização gerar times por posição, com somente um goleiro por time)
         - 0.0.0.0.08 (Tela inicial, atualização do menu e implementação de interfaces)
         - 0.0.0.0.09 (Implementação do sistema de pontos)
+        - 0.0.0.0.10 (Exeção para cumprir requisito)
+        - 0.0.0.1.0  (Nova funcionalidade Buscar Jogador)
